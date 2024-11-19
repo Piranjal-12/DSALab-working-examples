@@ -1,82 +1,56 @@
 public class LinkedList {
-    private Node front;
-    private Node rear;
+    private Node top;
 
-
-
-    static class Node{
+    public static class Node {
         public int data;
         public Node next;
-        public  Node (int data){
-            this.data=data;
-            this.next=null;
+
+
+        public Node(int data) {
+            this.data = data;
         }
     }
-    public boolean isEmpty(){
-        return (front==null);
+    public void insertFirst(int data){
+        Node n = new Node(data);
+        n.next = top;
+        top = n;
     }
-    public void insertLast(int new_data){
-        Node new_node = new Node(new_data);
-        if (isEmpty())
-            front = new_node;
-        else rear.next=new_node;
-        rear=new_node;
-    }
-    public int deleteFirst(){
-        int temp = front.data;;
-        if(front.next == null)
-            rear=null;
-        front=front.next;
+    public Node deleteFirst(){
+        Node temp = top;
+        top = top.next;
         return temp;
     }
-    public void displaylist(){
-        System.out.println("===Displaying Elements of DEQ===");
-        Node current = front;
-        while (current!=null){
+    public void displayList(){
+        Node current = top;
+        while(current!= null){
             System.out.println(current.data);
-            current=current.next;
+            current = current.next;
         }
-
     }
 }
-class Queue_2{
-    LinkedList llist;
-
-    public Queue_2() {
-        llist = new LinkedList(); }
-
-    public boolean isEmpty(){
-        return llist.isEmpty();
+class LinkedListStack{
+    LinkedList li = new LinkedList();
+    public void push(int element){
+        li.insertFirst(element);
     }
-    public void enqueue (int new_data){
-        llist.insertLast (new_data);
+    public void pop(){
+        li.deleteFirst();
     }
-    public int deque(){
-        return llist.deleteFirst();
-    }
-    void printQueue() {
-        llist.displaylist();
+    public void displayList(){
+        System.out.println(" ");
+        li.displayList();
     }
 }
-class QueueClient {
+class LLStackClient{
     public static void main(String[] args) {
-
-        Queue_2 list=new Queue_2();
-
-        list.enqueue (10);
-
-        list.enqueue (20);
-
-        list.enqueue (30);
-
-        list.enqueue (40);
-
-        list.printQueue();
-
-        list.deque();
-
-        list.printQueue();
-
+        LinkedListStack st = new LinkedListStack();
+        st.push(50);
+        st.push(70);
+        st.push(190);
+        System.out.println("1. Stack after push operation: ");
+        st.displayList();
+        System.out.println("1. Stack after pop operation: ");
+        st.pop();
+        st.displayList();
     }
-
 }
